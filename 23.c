@@ -3,9 +3,11 @@
 
 #define size 28300
 
+// I forgot how I did this problem :C
 _Bool abundant_num(int);
 
 int main() {
+	printf("Problem 23 - Non-abundant sums\n");
 	int sum, i, j, max;
 	int* nums = calloc(size, sizeof(int));
 	_Bool* sums = calloc(size, sizeof(int));
@@ -32,8 +34,11 @@ int main() {
 			sum -= i;
 		}
 	}
-
+	
+	free(nums);
+	free(sums);
 	printf("%d\n", sum);
+	return 0;
 }
 
 _Bool abundant_num(int n) {
