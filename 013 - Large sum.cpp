@@ -1,7 +1,6 @@
 // 013 - Large sum
 // @author Jacob Libsman
 
-#include "stdafx.h"
 #include <iostream>
 #include <string>
 #include <stack>
@@ -14,12 +13,14 @@ int main() {
 	int sum = 0;
 
 	ifstream inFile;
-	inFile.open("..\\013 - Data.txt");
-	for (int i = 0; i < 100; i++)
+	inFile.open("013.txt");
+	for (int i = 0; i < 100; i++) {
 		inFile >> nums[i];
+	}
 	for (int i = 49; i > -1; i--) {
-		for (int j = 0; j < 100; j++)
+		for (int j = 0; j < 100; j++) {
 			sum += nums[j].at(i) - '0';
+		}
 		digits.push(sum % 10);
 		sum = sum / 10;
 	}
