@@ -17,4 +17,5 @@ int main() {
 	}
 
 	printf("The sum of all the terms in the Fibonacci sequence whose values do not exceed four million is %d\n", sum);
+	return 0;
 }

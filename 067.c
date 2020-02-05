@@ -35,7 +35,7 @@ int main(int argc, char** argv) {
 		fd = open(argv[1], O_RDONLY);
 	}
 	else {
-		fd = open("67.txt", O_RDONLY);
+		fd = open("067.txt", O_RDONLY);
 	}
 	if (fd == -1) {
 		perror("ERROR");

@@ -25,8 +25,11 @@ int main() {
 		}
 		smallFactor++;
 	}
-	if (found)
+	if (found) {
 		printf("The largest prime factor of the number %lld is %lld\n",num, largeFactor);
-	else
+	}
+	else {
 		printf("%lld is a prime number\n", num);
+	}
+	return 0;
 }

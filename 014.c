@@ -1,9 +1,7 @@
 // 014 - Longest Collatz sequence
 // @author Jacob Libsman
 
-#include "stdafx.h"
-#include <iostream>
-using namespace std;
+#include <stdio.h>
 
 int main() {
 	int num = 1000000;
@@ -26,5 +24,6 @@ int main() {
 		}
 		num--;
 	}
-	cout << "The starting number, under one million, that produces the longest chain is " << largestNum << " : " << longestChain << "\n";
+	printf("The starting number, under one million, that produces the longest chain is %d : %d\n", largestNum, longestChain);
+	return 0;
 }

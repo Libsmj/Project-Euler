@@ -34,4 +34,5 @@ int main() {
 		digits.pop();
 	}
 	cout << "\n";
+	return 0;
 }

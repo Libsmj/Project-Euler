@@ -1,14 +1,13 @@
 // 011 - Largest product in a grid
 // @author Jacob Libsman
 
-#include "stdafx.h"
 #include <iostream>
 #include <fstream>
 using namespace std;
 
 int main() {
 	ifstream inFile;
-	inFile.open("..\\011 - Data.txt");
+	inFile.open("011.txt");
 	
 	int nums[20][20];
 	int x = 0;
@@ -70,4 +69,5 @@ int main() {
 		cout << "\n";
 	}
 	cout << "The greatest product of four adjacent numbers in the same direction (up, down, left, right, or diagonally) in the 20-20 grid is " << largestProduct << "\n";
+	return 0;
 }

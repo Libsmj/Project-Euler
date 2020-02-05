@@ -1,13 +1,10 @@
 // 015 - Lattice paths
 // @author Jacob Libsman
 
-#include "stdafx.h"
-#include <iostream>
-#include <string>
-using namespace std;
+#include <stdio.h>
 
 int main() {
-	const int gridSize = 20;
+	int gridSize = 20;
 	long long grid[gridSize + 1][gridSize + 1];
 
 	for (int i = 0; i <= gridSize; i++) {
@@ -19,5 +16,6 @@ int main() {
 			grid[i][j] = grid[i - 1][j] + grid[i][j - 1];
 		}
 	}
-	cout << "The number of routes that there are through a " << gridSize << "x" << gridSize << " grid is " << grid[gridSize][gridSize] << "\n";
+	printf("The number of routes that there are through a %d x %d grid is %lld\n", gridSize, gridSize, grid[gridSize][gridSize]);
+	return 0;
 }

@@ -1,9 +1,7 @@
 // 006 - Sum square difference
 // @author Jacob Libsman
 
-#include "stdafx.h"
-#include <iostream>
-using namespace std;
+#include <stdio.h>
 
 int main() {
 	long long sumOfSquares = 0;
@@ -13,5 +11,6 @@ int main() {
 		squaredOfSum += i;
 	}
 	squaredOfSum = squaredOfSum * squaredOfSum;
-	cout << "The difference between the sum of the squares of the first one hundred natural numbers and the square of the sum is " << (squaredOfSum - sumOfSquares) << "\n";
+	printf("The difference between the sum of the squares of the first one hundred natural numbers and the square of the sum is %lld\n", squaredOfSum - sumOfSquares);
+	return 0;
 }

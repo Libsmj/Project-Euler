@@ -1,7 +1,6 @@
 // 008 - Largest product in a series
 // @author Jacob Libsman
 
-#include "stdafx.h"
 #include <iostream>
 #include <string>
 #include <queue>
@@ -16,7 +15,7 @@ int main() {
 	queue<int> adjacentDigits;
 	int i = 0;
 	int fixedCounter = 0;
-	while (i < numTemp.size()) {
+	while (i < (int)numTemp.size()) {
 		if (i < numOfDigits && numTemp.at(i) - '0' != 0) {
 			adjacentDigits.push(numTemp.at(i) - '0');
 			lastProduct *= (numTemp.at(i) - '0');
@@ -41,4 +40,5 @@ int main() {
 		//cout << fixedCounter << " : " << numTemp << " : " << lastProduct << " : " << largestProduct << "\n";
 	}
 	cout << "The " << numOfDigits << " adjacent digits in the " << num.size() << "-digit number that have the greatest product is " << largestProduct << "\n";
+	return 0;
 }

@@ -1,6 +1,7 @@
 // 004 - Largest palindrome product
 // @author Jacob Libsman
 
+#include <stdio.h>
 #include <iostream>
 #include <string>
 using namespace std;
@@ -16,12 +17,13 @@ int main() {
 		}
 	}
 	printf("The largest palindrome made from the product of two 3-digit numbers is %d\n", largest);
+	return 0;
 }
 
 bool checkPalindrome(int num) {
 	string forward = to_string(num);
 	string backward;
-	for (int i = forward.size() - 1; i > -1 ; i--)
+	for (int i = forward.size() - 1; i > -1; i--)
 		backward += forward.at(i);
-	return forward._Equal(backward);
+	return !forward.compare(backward);
 }

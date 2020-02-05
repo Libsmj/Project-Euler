@@ -1,11 +1,10 @@
 // 007 - 10001st prime
 // @author Jacob Libsman
 
-#include "stdafx.h"
-#include <iostream>
-using namespace std;
+#include <stdio.h>
+#include <math.h> // Compile with -lm
 
-bool isPrime(int num);
+_Bool isPrime(int num);
 
 int main() {
 	int numOfPrime = 2;
@@ -16,19 +15,20 @@ int main() {
 			numOfPrime++;
 		prime++;
 	}
-	cout << "The 10001st prime number is " << prime << "\n";
+	printf("The 10001st prime number is %d\n", prime);
+	return 0;
 }
 
 // Does not check for 1
-bool isPrime(int num) {
+_Bool isPrime(int num) {
 	if (num % 2 == 0)
-		return false;
+		return 0;
 	long long testNum = 3;
 	long sqr = sqrt(num + 1);
 	while (testNum <= sqr) {
 		if (num % testNum == 0)
-			return false;
+			return 0;
 		testNum += 2;
 	}
-	return true;
+	return 1;
 }

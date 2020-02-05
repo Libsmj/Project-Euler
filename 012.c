@@ -1,10 +1,8 @@
 // 012 - Highly divisible triangular number
 // @author Jacob Libsman
 
-#include "stdafx.h"
-#include <iostream>
-#include <math.h>
-using namespace std;
+#include <stdio.h>
+#include <math.h> // Compile with -lm
 
 int main() {
 	long long num = 0;
@@ -14,13 +12,14 @@ int main() {
 		numOfDiv = 0;
 		int sqr = sqrt(num);
 		for (long long j = 1; j <= sqr; j++) {
-			if (num % j == 0)
+			if (num % j == 0) {
 				numOfDiv += 2;
+			}
 		}
 		if (sqr*sqr == num) {
 			numOfDiv--;
 		}
-		cout << num << " : " << numOfDiv << "\n";
+		//printf("%lld : %d\n", num, numOfDiv);
 	}
-	cout << "The value of the first triangle number to have over five hundred divisors is " << num << "\n";
+	printf("The value of the first triangle number to have over five hundred divisors is %lld\n", num);
 }
