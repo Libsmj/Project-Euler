@@ -25,7 +25,7 @@ int main() {
 		printf("The product abc is %ld\n", (long)(a * b * c));
 		printf("a is %d\n", a);
 		printf("b is %d\n", b);
-		printf("c is %e\n", c);
+		printf("c is %f\n", c);
 	}
 	else {
 		printf("No combination of natural numbers found\n");

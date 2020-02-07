@@ -2,7 +2,6 @@
 // @author Jacob Libsman
 
 #include <stdio.h>
-#include <math.h> // Compile with -lm
 
 _Bool isPrime(int num);
 
@@ -19,17 +18,19 @@ int main() {
 	return 0;
 }
 
-// Does not check for 1
-_Bool isPrime(int num) {
-	if (num % 2 == 0)
+_Bool isPrime(int n) {
+	if (n < 4) {
+		return n > 1;
+	}
+	if (!(n % 2) || !(n % 3)) {
 		return 0;
-	long long testNum = 3;
-	long sqr = sqrt(num + 1);
-	while (testNum <= sqr) {
-		if (num % testNum == 0) {
+	}
+	long long i = 5;
+	while (i * i < n + 1) {
+		if (!(n % i) || !(n % (i + 2))) {
 			return 0;
 		}
-		testNum += 2;
+		i += 6;
 	}
 	return 1;
 }
