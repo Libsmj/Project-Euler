@@ -1,17 +1,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 /*
-You are given the following information, but you may prefer to do some research for yourself.
+	You are given the following information, but you may prefer to do some research for yourself.
 
-1 Jan 1900 was a Monday.
-Thirty days has September,
-April, June and November.
-All the rest have thirty-one,
-Saving February alone,
-Which has twenty-eight, rain or shine.
-And on leap years, twenty-nine.
-A leap year occurs on any year evenly divisible by 4, but not on a century unless it is divisible by 400.
-How many Sundays fell on the first of the month during the twentieth century (1 Jan 1901 to 31 Dec 2000)?
+	1 Jan 1900 was a Monday.
+	Thirty days has September,
+	April, June and November.
+	All the rest have thirty-one,
+	Saving February alone,
+	Which has twenty-eight, rain or shine.
+	And on leap years, twenty-nine.
+	A leap year occurs on any year evenly divisible by 4, but not on a century unless it is divisible by 400.
+	How many Sundays fell on the first of the month during the twentieth century (1 Jan 1901 to 31 Dec 2000)?
 */
 
 int main(int argc, char** argv) {
@@ -27,9 +27,6 @@ int main(int argc, char** argv) {
 
 	while (year < 2001) {
 		if ((weekday == 1) == day && year > 1900) {
-#ifdef debug
-			printf("%d : %d : %d\n", month, day, year);
-#endif
 			first_sundays++;
 		}
 		// Check if end of the year

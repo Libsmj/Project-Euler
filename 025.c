@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+
 /*
 	The Fibonacci sequence is defined by the recurrence relation:
 
@@ -9,7 +10,6 @@
 */
 
 // Calculates fib nums with dynamic memory until we find one with 1000 digits
-
 char* add(char*, char*);
 
 int main() {

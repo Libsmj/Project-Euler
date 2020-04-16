@@ -10,7 +10,6 @@
 	Evaluate the sum of all the amicable numbers under 10000.
 */
 
-
 // Calculates all of the sums of proper devisors for all numbers under 'size'
 // Then checks for all amicable numbers - i == sums[sums[i]]
 int divisor_sum(int);

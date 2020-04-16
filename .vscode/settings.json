@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "*.salsa": "java",
+        "stdio.h": "c"
+    }
+}
