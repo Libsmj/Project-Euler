@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+#include <math.h>
+
 /*
     A unit fraction contains 1 in the numerator. The decimal representation of the unit fractions with denominators 2 to 10 are given:
 
@@ -18,16 +19,66 @@
     Find the value of d < 1000 for which 1/d contains the longest recurring cycle in its decimal fraction part.
 */
 
+int recurringCycle(int* a, int n);
+
 int main() {
-    char* r = calloc(20, sizeof(char));
-    long long unsigned int x = 1000000000000000000;
-    int longest = 6;
+    printf("Problem 26 - Reciprocal cycles\n");
+    int longestCycle = 0;
+    int D = 0;
 
     for (int d = 2; d < 1000; d++) {
-        sprintf(r, "%llu", x / d);
-        printf("%4d : %s\n", d, r);
-    }
+        int* quotient = malloc(1000 * sizeof(int));
+        int n = 0;
+        int r = 0;
 
-    free(r);
+        int numerator = pow(10, (int)log10(d) + 1);
+        printf("1/%3d : 0.", d);
+        do {
+            quotient[n] = numerator / d;
+
+            printf("%d", quotient[n]);
+            numerator = (numerator % d) * 10;
+
+            n++;
+            r = recurringCycle(quotient, n);
+        } while (r == 0 && numerator != 0);
+
+        printf("\n");
+        if (n / 2 > longestCycle) {
+            longestCycle = n / 2;
+            D = d;
+        }
+
+        free(quotient);
+    }
+    printf("The value of d is %d with cycle %d\n", D, longestCycle);
+    return 0;
+}
+
+int recurringCycle(int* a, int n) {
+    // printf("0.");
+    // for (int i = 0; i < n; i++) {
+    //     printf("%d", a[i]);
+    // }
+    // printf("\n");
+    for (int i = 0; i < n - 1; i++) {
+        //printf("%d\n", i);
+        if ((n - i) % 2) {
+            continue;
+        }
+
+        int cycle = 1;
+        for (int j = i; j < ((n + i) / 2); j++) {
+            //printf("\t%d - %d\n", j, j + ((n - i) / 2));
+            if (a[j] != a[j + ((n - i) / 2)]) {
+                cycle = 0;
+                break;
+            }
+        }
+        if (cycle) {
+            return (n - i) / 2;
+        }
+        //printf("-\n");
+    }
     return 0;
 }
