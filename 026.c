@@ -26,8 +26,8 @@ int main() {
     int longestCycle = 0;
     int D = 0;
 
+    int* quotient = malloc(1000 * sizeof(int));
     for (int d = 2; d < 1000; d++) {
-        int* quotient = malloc(1000 * sizeof(int));
         int n = 0;
         int r = 0;
 
@@ -48,9 +48,8 @@ int main() {
             longestCycle = n / 2;
             D = d;
         }
-
-        free(quotient);
     }
+    free(quotient);
     printf("The value of d is %d with cycle %d\n", D, longestCycle);
     return 0;
 }
@@ -76,6 +75,7 @@ int recurringCycle(int* a, int n) {
             }
         }
         if (cycle) {
+            
             return (n - i) / 2;
         }
         //printf("-\n");
