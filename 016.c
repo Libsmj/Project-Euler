@@ -15,7 +15,7 @@ int main(int argc, char* argv[]) {
 		fprintf(stderr, "Problem 16 calculates the sum of all the digits of 2^x\n");
 		return 1;
 	}
-	int power = atoi(argv[1]);
+	int power = (int) strtol(argv[1], (char**)NULL, 10);
 	char* digits = calloc(power, sizeof(char));
 	int rank = 0;
 	digits[0] = 1;
@@ -41,6 +41,6 @@ int main(int argc, char* argv[]) {
 	for (int i = 0; i < power; i++)
 		sum += digits[i];
 	free(digits);
-	printf("%d\n", sum);
+	printf("The sum of the digits of the number 2^%d is %d\n", power, sum);
 	return 0;
 }

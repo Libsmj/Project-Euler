@@ -19,66 +19,50 @@
     Find the value of d < 1000 for which 1/d contains the longest recurring cycle in its decimal fraction part.
 */
 
-int recurringCycle(int* a, int n);
+int recurringCycle(int d);
 
 int main() {
     printf("Problem 26 - Reciprocal cycles\n");
     int longestCycle = 0;
-    int D = 0;
+    int d = 1;
 
-    int* quotient = malloc(1000 * sizeof(int));
-    for (int d = 2; d < 1000; d++) {
-        int n = 0;
-        int r = 0;
+    for (int D = 2; D < 1000; D++) {
+        int cycle = recurringCycle(D);
 
-        int numerator = pow(10, (int)log10(d) + 1);
-        printf("1/%3d : 0.", d);
-        do {
-            quotient[n] = numerator / d;
-
-            printf("%d", quotient[n]);
-            numerator = (numerator % d) * 10;
-
-            n++;
-            r = recurringCycle(quotient, n);
-        } while (r == 0 && numerator != 0);
-
-        printf("\n");
-        if (n / 2 > longestCycle) {
-            longestCycle = n / 2;
-            D = d;
+        if (cycle > longestCycle) {
+            longestCycle = cycle;
+            d = D;
         }
     }
-    free(quotient);
-    printf("The value of d is %d with cycle %d\n", D, longestCycle);
+
+    printf("The value of d is %d with cycle %d\n", d, longestCycle);
     return 0;
 }
 
-int recurringCycle(int* a, int n) {
-    // printf("0.");
-    // for (int i = 0; i < n; i++) {
-    //     printf("%d", a[i]);
-    // }
-    // printf("\n");
-    for (int i = 0; i < n - 1; i++) {
-        //printf("%d\n", i);
-        if ((n - i) % 2) {
-            continue;
-        }
+// Record all the remainders from long division, once a remainder is 0 or repeats a number, we've found the cycle
+// If we are dividing by x there are x-1 possible remainders.
+int recurringCycle(int divisor) {
+    int quotient = 0;
+    int remainder = 0;
+    int numerator = pow(10, (int)log10(divisor) + 1);
+    
+    int* remainders = calloc(divisor, sizeof(int));
+    int n = 0;
+    // printf("%d : ", divisor);
+    while (1) {
+        quotient = numerator / divisor;
+        remainder = numerator - divisor * quotient;
+        numerator = remainder * 10;
+        // printf("%d", quotient);
 
-        int cycle = 1;
-        for (int j = i; j < ((n + i) / 2); j++) {
-            //printf("\t%d - %d\n", j, j + ((n - i) / 2));
-            if (a[j] != a[j + ((n - i) / 2)]) {
-                cycle = 0;
-                break;
-            }
+        if (remainders[remainder]) {
+            break;
         }
-        if (cycle) {
-            
-            return (n - i) / 2;
-        }
-        //printf("-\n");
+        remainders[remainder] = 1;
+        n++;
     }
-    return 0;
+    // printf("\n");
+
+    free(remainders);
+    return n;
 }

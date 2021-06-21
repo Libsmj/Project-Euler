@@ -1,9 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <unistd.h>
 
 /*
     In the 20×20 grid below (011.txt), four numbers along a diagonal line have been marked in red.
@@ -15,42 +11,37 @@
 
 int main(int argc, char** argv) {
     printf("Problem 11 - Largest product in a grid\n");
-    int fd, i, j, k;
+    int i, j, k;
     int d = 20;
-    int p = 4;
+    int l = 4;
+    int p = 2;
     int largestProduct = 0;
-    char* buff = malloc(p * sizeof(char));
+    char* buff = malloc( (p+2) * sizeof(char));
     int** grid = malloc(d * sizeof(int*));
     for (i = 0; i < d; i++) {
         grid[i] = malloc(d * sizeof(int));
     }
+    FILE* fp = fopen("011.txt", "r");
 
-    if (argc > 1) {
-		fd = open(argv[1], O_RDONLY);
-	}
-	else {
-		fd = open("011.txt", O_RDONLY);
-	}
-	if (fd == -1) {
-		perror("ERROR");
-		return 1;
-	}
-
-    i = 0; j = 0;
-    while(1) {
-        if (!read(fd, buff, 3)) {
-            break;
+    i = 0;
+    for (i = 0; i < d; i++){
+        for (j = 0; j < d; j++) {
+            fgets( buff, p+2, fp );
+            buff[p] = 0;
+            grid[i][j] = (int) strtol(buff, (char**)NULL, 10);
         }
-        grid[i++][j] = atoi(buff);
-        if (i == d) {
-            i = 0; 
-            j++;
+        fgets( buff, p, fp );
+    }
+    for (i = 0; i < 20; i++) {
+        for (j = 0; j < 20; j++) {
+            printf("%2d ", grid[i][j]);
         }
+        printf("\n");
     }
     
     // Vertical
     for (i = 0; i < d; i++) {
-        for (j = 0; j < d - p; j++) {
+        for (j = 0; j < d - l; j++) {
             int product = 1;
             for (k = 0; k < p; k++) {
                 product *= grid[i][j + k];
@@ -62,7 +53,7 @@ int main(int argc, char** argv) {
     }
 
     // Horizontal
-    for (i = 0; i < d - p; i++) {
+    for (i = 0; i < d - l; i++) {
         for (j = 0; j < d; j++) {
             int product = 1;
             for (k = 0; k < p; k++) {
@@ -75,10 +66,10 @@ int main(int argc, char** argv) {
     }
 
     // Diagonal top left to bottom right
-    for (i = 0; i < d - p; i++) {
-        for (j = 0; j < d - p; j++) {
+    for (i = 0; i < d - l; i++) {
+        for (j = 0; j < d - l; j++) {
             int product = 1;
-            for (k = 0; k < p; k++) {
+            for (k = 0; k < l; k++) {
                 product *= grid[i + k][j + k];
             }
             if (product > largestProduct) {
@@ -88,10 +79,10 @@ int main(int argc, char** argv) {
     }
 
     // Diagonal top right to bottom left
-    for (i = 0; i < d - p; i++) {
-        for (j = p; j < d; j++) {
+    for (i = 0; i < d - l; i++) {
+        for (j = l; j < d; j++) {
             int product = 1;
-            for (k = 0; k < p; k++) {
+            for (k = 0; k < l; k++) {
                 product *= grid[i + k][j - k];
             }
             if (product > largestProduct) {
@@ -100,6 +91,7 @@ int main(int argc, char** argv) {
         }
     }
 
+    fclose(fp);
     for (int i = 0; i < d; i++) {
         free(grid[i]);
     }

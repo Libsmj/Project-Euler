@@ -3,7 +3,7 @@
 
 #include <stdio.h>
 
-_Bool isPrime(int num);
+int isPrime(int num);
 
 int main() {
 	long long sum = 2;
@@ -18,7 +18,7 @@ int main() {
 	return 0;
 }
 
-_Bool isPrime(int n) {
+int isPrime(int n) {
 	if (n < 4) {
 		return n > 1;
 	}

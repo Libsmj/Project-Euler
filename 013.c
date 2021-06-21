@@ -1,10 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <unistd.h>
 
 /*
     Work out the first ten digits of the sum of the following one-hundred 50-digit numbers (013.txt).
@@ -12,34 +7,23 @@
 
 int main(int argc, char** argv) {
     printf("Problem 13 - Large sum\n");
-    int fd, i, j, carry;
+    int i, j, carry;
     int d = 100;
     int p = 50;
-    char* buff = malloc(50 * sizeof(int));
+    char* buff = malloc((p+1) * sizeof(int));
     char** nums = malloc(d * sizeof(char*));
     for (i = 0; i < d; i++) {
-        nums[i] = malloc(p * sizeof(char));
+        nums[i] = malloc((p+1) * sizeof(char));
     }
     int* sum = calloc(p, sizeof(int));
-
-    if (argc > 1) {
-		fd = open(argv[1], O_RDONLY);
-	}
-	else {
-		fd = open("013.txt", O_RDONLY);
-	}
-	if (fd == -1) {
-		perror("ERROR");
-		return 1;
-	}
-
+    FILE* fp = fopen("013.txt", "r");
+    
     i = 0;
-    while(1) {
-        if (!read(fd, buff, p + 1)) {
-            break;
+    for (i = 0; i < d; i++){
+        fgets( buff, p+3, fp );
+        for (j = 0; j < p; j++) {
+            nums[i][j] = buff[j];
         }
-        buff[p] = 0;
-        strcpy(nums[i++], buff);
     }
 
     for (i = 0; i < p; i++) {
@@ -67,6 +51,7 @@ int main(int argc, char** argv) {
     }
     printf("\n");
 
+    fclose(fp);
     free(sum);
     for (i = 0; i < d; i++) {
         free(nums[i]);

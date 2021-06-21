@@ -42,9 +42,11 @@ int palandrome(int x) {
     int size = sprintf(num, "%d", x);
     for (int i = 0; i < size / 2; i++) {
         if (num[i] != num[size - i - 1]) {
+            free(num);
             return 0;
         }
     }
+    free(num);
     return 1;
 }
 

@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define size 28300
+#define largest_abundant_num 28123
 
 /*
 	A perfect number is a number for which the sum of its proper divisors is exactly equal to the number. 
@@ -16,50 +16,54 @@
 	Find the sum of all the positive integers which cannot be written as the sum of two abundant numbers.
 */
 
-_Bool abundant_num(int);
+int is_abundant(int n);
 
 int main() {
 	printf("Problem 23 - Non-abundant sums\n");
 	int sum, i, j, max;
-	int* nums = malloc(size * sizeof(int));
-	_Bool* sums = malloc(size * sizeof(int));
-	
-	sum = 0;
-	for (i = 0; i < size; i++) {
-		sum += i;
-	}
+	int* abundant_nums = calloc(largest_abundant_num, sizeof(int));
+	int* abundant_sums = calloc(largest_abundant_num*2, sizeof(int));
 
-	for (i = 0, max = 0; i < size; i++) {
-		if (abundant_num(i)) {
-			nums[max++] = i;
+	// Calculates if i is an abundant number, then stores it in the "list" nums
+	for (i = 0, max = 0; i <= largest_abundant_num; i++) {
+		if (is_abundant(i)) {
+			abundant_nums[max++] = i;
 		}
 	}
 
+	// Adds all the abundant_nums and sets these sums to 1 in the array abundant_sums
 	for (i = 0; i < max; i++) {
-		for (j = 0; j < max; j++) {
-			sums[nums[i] + nums[j]] = 1;
+		for (j = i; j < max; j++) {
+			abundant_sums[abundant_nums[i] + abundant_nums[j]] = 1;
 		}
 	}
 
-	for (i = 0; i < size; i++) {
-		if (sums[i]){
-			sum -= i;
+	// Adds all of the non-abundant_sums
+	for (i = 0, sum = 0; i <= largest_abundant_num; i++) {
+		if (!abundant_sums[i]){
+			sum += i;
 		}
 	}
 	
-	free(nums);
-	free(sums);
+	free(abundant_nums);
+	free(abundant_sums);
 	printf("%d\n", sum);
 	return 0;
 }
 
-_Bool abundant_num(int n) {
-	int sum, i;
-	sum = 0;
-	for (i = 1; i < n; i++) {
-		if (!(n % i)) { 
-			sum += i;
-		}
-	}
-	return sum > n;
+int is_abundant(int n)
+{
+     int sum = 0;
+     for (int i = 2; i*i <= n; i++)
+     {
+         if (!(n % i))
+         {
+            sum += i;
+            if (i < n / i)
+               sum += n / i;
+            if (n <= sum)
+               return 1;
+         }
+     }
+     return sum > n;
 }
