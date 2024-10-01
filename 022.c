@@ -24,8 +24,8 @@ int main() {
 	FILE* file = fopen("022.txt", "r");
     
 	// Read the whole file
-	char* buffer = malloc(50000 * sizeof(char));
 	int buff_size = 50000;
+	char* buffer = malloc(buff_size * sizeof(char));
 	fgets(buffer, buff_size, file);
 
 	// Split into array of names
