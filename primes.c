@@ -8,18 +8,18 @@
 int isPrime(int);
 
 int main(int argc, char** argv) {
-    long long n;
+    unsigned long long n;
     if (argc == 2) {
-		n = atoi(argv[1]);
+		n = strtoull(argv[1], NULL, 10);
 	}
 	else {
 		printf("ERROR: Please enter an integer\n");
 		return 1;
 	}
     FILE* file = fopen("primes.txt", "w+");
-    char* num = calloc(100, sizeof(char));
+    char* num = malloc(1024 * sizeof(char));
 
-    for (long long i = 2; i <= n; i++) {
+    for (unsigned long long i = 2; i <= n; i++) {
         if (isPrime(i)) {
             sprintf(num, "%llu,", i);
             fputs(num, file);
@@ -38,7 +38,7 @@ int isPrime(int n) {
 	if (!(n % 2) || !(n % 3)) {
 		return 0;
 	}
-	long long i = 5;
+	unsigned long long i = 5;
 	while (i * i < n + 1) {
 		if (!(n % i) || !(n % (i + 2))) {
 			return 0;
