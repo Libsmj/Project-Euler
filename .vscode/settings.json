@@ -1,9 +1,0 @@
-{
-    "files.associations": {
-        "stdio.h": "c",
-        "chrono": "c",
-        "random": "c",
-        "limits": "c",
-        "algorithm": "c"
-    }
-}
